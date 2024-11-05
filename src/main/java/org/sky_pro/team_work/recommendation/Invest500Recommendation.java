@@ -1,12 +1,17 @@
 package org.sky_pro.team_work.recommendation;
 
+import lombok.RequiredArgsConstructor;
+import org.sky_pro.team_work.repository.RecommendationsRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor
 public class Invest500Recommendation extends Recommendation {
+
+    private final RecommendationsRepository repository;
 
     {
         this.id = UUID.fromString("147f6a0f-3b91-413b-ab99-87f081d60d5a");
@@ -21,7 +26,12 @@ public class Invest500Recommendation extends Recommendation {
 
     @Override
     public Optional<RecommendationRuleSet> checkRecommendation(UUID userId) {
-
-        return Optional.empty();
+        Optional<RecommendationRuleSet> result = Optional.empty();
+        // было бы здорово вынести типы транзакций в enum, например
+        boolean isUserUsedDeposit = repository.isUserUsedTransactionType(userId, "DEPOSIT");
+        if (isUserUsedDeposit /* и другие условия */) {
+            result = Optional.of(this);
+        }
+        return result;
     }
 }
