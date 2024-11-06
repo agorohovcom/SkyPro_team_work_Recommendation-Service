@@ -5,3 +5,5 @@ spring:
 application:
   recommendations-db:
     url: jdbc:h2:file:./transaction
+    maxPoolSize: 30
+    minIdle: 5

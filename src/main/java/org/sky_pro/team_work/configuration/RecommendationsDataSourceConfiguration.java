@@ -14,11 +14,15 @@ public class RecommendationsDataSourceConfiguration {
 
     @Bean(name = "recommendationsDataSource")
     public DataSource recomendationsDataSource(
-            @Value("${application.recommendations-db.url}") String recommendationsUrl) {
+            @Value("${application.recommendations-db.url}") String recommendationsUrl,
+            @Value("${application.recommendations-db.maxPoolSize:10}") int maxPoolSize,
+            @Value("${application.recommendations-db.minIdle:5}") int minIdle) {
         var dataSource = new HikariDataSource();
         dataSource.setJdbcUrl(recommendationsUrl);
         dataSource.setDriverClassName("org.h2.Driver");
         dataSource.setReadOnly(true);
+        dataSource.setMaximumPoolSize(maxPoolSize);
+        dataSource.setMinimumIdle(minIdle);
         return dataSource;
     }
 
