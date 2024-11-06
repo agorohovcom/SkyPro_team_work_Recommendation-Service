@@ -55,6 +55,6 @@ public class RecommendationsRepository {
                     productType,
                     transactionType);
         }
-        return result;
+        return result != null ? result : 0L;
     }
 }

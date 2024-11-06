@@ -26,7 +26,6 @@ public class Invest500Recommendation extends Recommendation {
 
     @Override
     public Optional<RecommendationRuleSet> checkRecommendation(UUID userId) {
-        Optional<RecommendationRuleSet> result = Optional.empty();
         // было бы здорово вынести типы транзакций в enum, например
         boolean isUserUsedDeposit = repository.isUserUsedTransactionType(userId, "DEBIT");
         boolean isUserNotUsedInvest = !repository.isUserUsedTransactionType(userId, "INVEST");
@@ -34,9 +33,8 @@ public class Invest500Recommendation extends Recommendation {
                 repository.sumAmountOfTransactionsByProduct(
                         userId, "SAVING", "DEPOSIT") > 1000;
 
-        if (isUserUsedDeposit && isUserNotUsedInvest && isUserHaveEnoughSumAmountOfTransactionsByProduct) {
-            result = Optional.of(this);
-        }
-        return result;
+        return isUserUsedDeposit && isUserNotUsedInvest && isUserHaveEnoughSumAmountOfTransactionsByProduct ?
+                Optional.of(this) :
+                Optional.empty();
     }
 }
