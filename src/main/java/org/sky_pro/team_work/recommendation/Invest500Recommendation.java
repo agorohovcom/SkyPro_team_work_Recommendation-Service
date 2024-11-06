@@ -30,8 +30,11 @@ public class Invest500Recommendation extends Recommendation {
         // было бы здорово вынести типы транзакций в enum, например
         boolean isUserUsedDeposit = repository.isUserUsedTransactionType(userId, "DEBIT");
         boolean isUserNotUsedInvest = !repository.isUserUsedTransactionType(userId, "INVEST");
+        boolean isUserHaveEnoughSumAmountOfTransactionsByProduct =
+                repository.sumAmountOfTransactionsByProduct(
+                        userId, "SAVING", "DEPOSIT") > 1000;
 
-        if (isUserUsedDeposit && isUserNotUsedInvest /* условие 3 */) {
+        if (isUserUsedDeposit && isUserNotUsedInvest && isUserHaveEnoughSumAmountOfTransactionsByProduct) {
             result = Optional.of(this);
         }
         return result;
