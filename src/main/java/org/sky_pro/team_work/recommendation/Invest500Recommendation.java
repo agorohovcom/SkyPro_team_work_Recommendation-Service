@@ -28,8 +28,10 @@ public class Invest500Recommendation extends Recommendation {
     public Optional<RecommendationRuleSet> checkRecommendation(UUID userId) {
         Optional<RecommendationRuleSet> result = Optional.empty();
         // было бы здорово вынести типы транзакций в enum, например
-        boolean isUserUsedDeposit = repository.isUserUsedTransactionType(userId, "DEPOSIT");
-        if (isUserUsedDeposit /* и другие условия */) {
+        boolean isUserUsedDeposit = repository.isUserUsedTransactionType(userId, "DEBIT");
+        boolean isUserNotUsedInvest = !repository.isUserUsedTransactionType(userId, "INVEST");
+
+        if (isUserUsedDeposit && isUserNotUsedInvest /* условие 3 */) {
             result = Optional.of(this);
         }
         return result;

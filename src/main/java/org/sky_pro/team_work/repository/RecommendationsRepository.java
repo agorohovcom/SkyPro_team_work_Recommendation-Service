@@ -16,26 +16,18 @@ public class RecommendationsRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public boolean isUserUsedTransactionType(UUID user, String type) {
-        String id = user.toString();
+    public boolean isUserUsedTransactionType(UUID userId, String type) {
         try {
             return Boolean.TRUE.equals(jdbcTemplate.queryForObject(
-                    "SELECT EXISTS(SELECT 1 FROM TRANSACTIONS WHERE USER_ID = ? AND TYPE = ?)",
+                    "SELECT EXISTS (SELECT * FROM TRANSACTIONS t " +
+                            "LEFT JOIN PRODUCTS p ON t.PRODUCT_ID = p.ID " +
+                            "WHERE t.USER_ID = ? AND p.TYPE = ?)",
                     Boolean.class,
-                    id,
+                    userId,
                     type
             ));
         } catch (DataAccessException e) {
-            e.printStackTrace(System.err);
             return false;
         }
-    }
-
-    public int getRandomTransactionAmount(UUID user) {
-        Integer result = jdbcTemplate.queryForObject(
-                "SELECT amount FROM transactions t WHERE t.user_id = ? LIMIT 1",
-                Integer.class,
-                user);
-        return result != null ? result : 0;
     }
 }

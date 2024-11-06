@@ -14,8 +14,7 @@ public class RecommendationsDataSourceConfiguration {
 
     @Bean(name = "recommendationsDataSource")
     public DataSource recomendationsDataSource(
-            @Value("${application.recommendations-db.url}") String recommendationsUrl
-    ) {
+            @Value("${application.recommendations-db.url}") String recommendationsUrl) {
         var dataSource = new HikariDataSource();
         dataSource.setJdbcUrl(recommendationsUrl);
         dataSource.setDriverClassName("org.h2.Driver");
@@ -25,8 +24,7 @@ public class RecommendationsDataSourceConfiguration {
 
     @Bean(name = "recommendationsJdbcTemplate")
     public JdbcTemplate recommendationsJdbcTemplate(
-            @Qualifier("recommendationsDataSource") DataSource dataSource
-    ) {
+            @Qualifier("recommendationsDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 }
