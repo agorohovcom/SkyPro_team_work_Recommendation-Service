@@ -1,13 +1,12 @@
 package org.sky_pro.team_work.repository;
 
-import org.sky_pro.team_work.domain.UserInfoForRules;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
-import static org.sky_pro.team_work.Util.SqlUtil.findUserInfoSQL;
+import static org.sky_pro.team_work.Util.SqlUtil.*;
 
 @Repository
 public class RecommendationsRepository {
@@ -17,19 +16,15 @@ public class RecommendationsRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public UserInfoForRules findInfoForRules(UUID user) {
-        return jdbcTemplate.query(findUserInfoSQL, new Object[]{user, user, user, user}, rs -> {
-            if (rs.next()) {
-                UserInfoForRules userInfo = new UserInfoForRules();
-                userInfo.setHaveCredit(rs.getBoolean("isHaveCredit"));
-                userInfo.setHaveDebit(rs.getBoolean("isHaveDebit"));
-                userInfo.setHaveInvest(rs.getBoolean("isHaveInvest"));
-                userInfo.setDebitDeposit(rs.getInt("debitDeposit"));
-                userInfo.setDebitWithdraw(rs.getInt("debitWithdraw"));
-                userInfo.setSavingDeposit(rs.getInt("savingDeposit"));
-                return userInfo;
-            }
-            return null;
-        });
+    public boolean isInvest500(UUID user) {
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(checkInvest500, Boolean.class, user, user, user));
+    }
+
+    public boolean isTopSaving(UUID user) {
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(checkTopSaving, Boolean.class,user, user));
+    }
+
+    public boolean isSimpleCredit(UUID user) {
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(checkSimpleCredit, Boolean.class, user, user));
     }
 }

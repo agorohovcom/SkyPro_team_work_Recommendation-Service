@@ -2,7 +2,6 @@ package org.sky_pro.team_work.rules.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.sky_pro.team_work.domain.Recommendation;
-import org.sky_pro.team_work.domain.UserInfoForRules;
 import org.sky_pro.team_work.domain.products.TopSaving;
 import org.sky_pro.team_work.repository.RecommendationsRepository;
 import org.sky_pro.team_work.rules.RecommendationRuleSet;
@@ -15,17 +14,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TopSavingRuleSet implements RecommendationRuleSet {
 
-    private final RecommendationsRepository recommendationsRepository;
+    private final RecommendationsRepository repository;
 
     @Override
     public Optional<Recommendation> getRecommendation(UUID userId) {
-        UserInfoForRules userInfoForRules = recommendationsRepository.findInfoForRules(userId);
-        if (userInfoForRules != null && userInfoForRules.isHaveDebit()
-                && (userInfoForRules.getDebitDeposit() >= 50000 || userInfoForRules.getSavingDeposit() >= 50000)
-                && ((userInfoForRules.getDebitDeposit() - userInfoForRules.getDebitWithdraw()) > 0)) {
-            return Optional.of(new TopSaving());
-        }
-        return Optional.empty();
+        return repository.isTopSaving(userId) ? Optional.of(new TopSaving()) : Optional.empty();
     }
 }
 
