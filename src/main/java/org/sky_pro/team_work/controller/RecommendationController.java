@@ -34,5 +34,9 @@ public class RecommendationController {
             this.user_id = user_id;
             this.recommendations = recommendations;
         }
+
+        public String getUserId() {
+            return user_id;
+        }
     }
 }
