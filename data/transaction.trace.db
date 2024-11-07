@@ -1,0 +1,13 @@
+2024-11-07 05:08:21.334227+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TRANSACTIONS" not found (this database is empty); SQL statement:
+SELECT
+    SUM(CASE WHEN p.type = 'DEBIT' AND t.transaction_type = 'DEPOSIT' THEN t.amount ELSE 0 END) AS total_debit_deposits,
+    SUM(CASE WHEN p.type = 'SAVING' AND t.transaction_type = 'DEPOSIT' THEN t.amount ELSE 0 END) AS total_saving_deposits,
+    SUM(CASE WHEN p.type = 'DEBIT' AND t.transaction_type = 'WITHDRAWAL' THEN t.amount ELSE 0 END) AS total_debit_withdrawals,
+    COUNT(DISTINCT CASE WHEN p.type = 'DEBIT' THEN p.id END) AS debit_product_count,
+    COUNT(DISTINCT CASE WHEN p.type = 'INVEST' THEN p.id END) AS invest_product_count,
+    COUNT(DISTINCT CASE WHEN p.type = 'CREDIT' THEN p.id END) AS credit_product_count
+FROM transactions t
+JOIN products p ON t.product_id = p.id
+WHERE t.user_id = ?
+ [42104-224]

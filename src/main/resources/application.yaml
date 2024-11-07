@@ -1,0 +1,7 @@
+spring:
+ application:
+  name: team_work
+
+application:
+ recommendations-db:
+  url: jdbc:h2:file:./transaction
