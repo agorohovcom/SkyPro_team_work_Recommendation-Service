@@ -1,7 +1,12 @@
 spring:
-  application:
-    name: team_work
+  datasource:
+    url: jdbc:postgresql://localhost:5432/recommendationDB
+    username:  student
+    password:  chocolatefrog
+  liquibase:
+    change-log: classpath:db/liquibase/changelog-master.yml
 
 application:
   recommendations-db:
     url: jdbc:h2:file:./transaction
+
