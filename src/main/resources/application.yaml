@@ -10,3 +10,6 @@ application:
   recommendations-db:
     url: jdbc:h2:file:./transaction
 
+springdoc:
+  swagger-ui:
+    operationsSorter: method
