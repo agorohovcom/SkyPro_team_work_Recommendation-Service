@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: db/liquibase/scripts/create_table_recommendation.yaml

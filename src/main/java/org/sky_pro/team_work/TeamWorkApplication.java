@@ -13,3 +13,12 @@ public class TeamWorkApplication {
     }
 
 }
+
+//todo в application.yaml прописать свои настройки подключения к бд
+//spring:
+//datasource:
+//url: jdbc:postgresql://localhost:5432/recommendationDB - свои настройки
+//username:  student - свои настройки
+//password:  chocolatefrog - свои настройки
+//liquibase:
+//change-log: classpath:db/liquibase/changelog-master.yml
