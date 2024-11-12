@@ -4,48 +4,46 @@ databaseChangeLog:
       author: sergey_white
       changes:
         - createTable:
-            tableName: Rule
+            tableName: rule
             columns:
               - column:
                   name: id
-                  type: BIGINT
-                  autoIncrement: true
+                  type: BIGSERIAL
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: productName
+                  name: product_name
                   type: VARCHAR(255)
               - column:
-                  name: productId
+                  name: product_id
                   type: VARCHAR(255)
               - column:
-                  name: productText
+                  name: product_text
                   type: VARCHAR(255)
+
         - createTable:
-            tableName: Query
+            tableName: query
             columns:
-              - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
               - column:
                   name: rule_id
-                  type: BIGINT
+                  type: BIGSERIAL
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_query_rule
-                    referencedTableName: Rule
-                    referencedColumnNames: id
               - column:
-                  name: query
+                  name: query_type
                   type: VARCHAR(255)
               - column:
                   name: arguments
-                  type: VARCHAR(255)
+                  type: TEXT[]
               - column:
                   name: negate
                   type: BOOLEAN
+
+        - addForeignKeyConstraint:
+            baseTableName: query
+            baseColumnNames: rule_id
+            constraintName: fk_query_rule
+            referencedTableName: rule
+            referencedColumnNames: id
+            onDelete: CASCADE
