@@ -11,15 +11,16 @@ import java.util.List;
 @RequestMapping("/rule")
 @RequiredArgsConstructor
 public class RuleController {
-    private final RuleService ruleService;
+    private final RuleService service;
 
     @GetMapping
     public List<Rule> getRules() {
-       return ruleService.getAll();
+        System.out.println(service.getAll().stream().map(Rule::getQuery).toList());
+        return service.getAll();
     }
 
     @PostMapping
     public Rule addRule(@RequestBody Rule rule) {
-        return ruleService.add(rule);
+        return service.add(rule);
     }
 }
