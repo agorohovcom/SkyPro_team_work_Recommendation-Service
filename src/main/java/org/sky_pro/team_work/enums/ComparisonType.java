@@ -14,6 +14,15 @@ public enum ComparisonType {
 
     private final String operator;
 
+    public static ComparisonType fromOperator(String operator) {
+        for (ComparisonType type : ComparisonType.values()) {
+            if (type.getOperator().equals(operator)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("No enum constant for operator: " + operator);
+    }
+
     ComparisonType(String operator) {
         this.operator = operator;
     }
