@@ -1,27 +1,31 @@
 package org.sky_pro.team_work.service;
 
 import lombok.RequiredArgsConstructor;
+import org.sky_pro.team_work.Util.RuleChecker;
 import org.sky_pro.team_work.domain.Recommendation;
-import org.sky_pro.team_work.rules.RecommendationRuleSet;
+import org.sky_pro.team_work.domain.Rule;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.stream.Collectors;
+import java.util.*;
+
 
 @Service
 @RequiredArgsConstructor
 public class RecommendationsService {
 
-    private final List<RecommendationRuleSet> ruleSets;
+    private final RuleChecker ruleChecker;
+    private final RuleService ruleService;
 
 
     public List<Recommendation> getRecommendations(UUID userId) {
-        return ruleSets.stream()
-                .map(ruleSet -> ruleSet.getRecommendation(userId))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toList());
+        List<Rule> rules = ruleService.getAll();
+        List<Recommendation> recommendations = new ArrayList<>();
+        for (Rule rule : rules) {
+            if (ruleChecker.checkUserByRule(userId, rule))
+                recommendations.add(new Recommendation(UUID.randomUUID(), rule.getProductName(), rule.getProductText()));
+        }
+        return recommendations;
     }
+
 }
+

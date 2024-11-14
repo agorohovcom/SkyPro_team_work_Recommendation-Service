@@ -13,9 +13,9 @@ import java.util.List;
 public class RuleController {
     private final RuleService service;
 
+
     @GetMapping
     public List<Rule> getRules() {
-        System.out.println(service.getAll().stream().map(Rule::getQuery).toList());
         return service.getAll();
     }
 
@@ -23,4 +23,5 @@ public class RuleController {
     public Rule addRule(@RequestBody Rule rule) {
         return service.add(rule);
     }
+
 }
