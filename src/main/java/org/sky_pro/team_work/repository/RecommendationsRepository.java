@@ -43,8 +43,20 @@ public class RecommendationsRepository {
     public boolean checkTransactionSumCompareDepositWithdraw(UUID userId, ProductType productType, ComparisonType comparison) {
         String sql = SqlUtil.transactionSumCompareDepositWithdraw(productType, comparison, userId);
         System.out.println(comparison);
-        System.out.println("heckTransactionSumCompareDepositWithdraw  " + sql);
+        System.out.println("checkTransactionSumCompareDepositWithdraw  " + sql);
         return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class));
+    }
+
+    public boolean checkDebitOrSavingMoreFifty(UUID userId, ProductType productType,TransactionType transactionType,
+                                               ComparisonType comparisonOr,
+                                               ProductType productType1, TransactionType transactionType1,
+                                               ComparisonType comparison,Integer compareNumber) {
+        String sql=SqlUtil.debitSumOrSavingSumMoreFifty(productType,transactionType,comparisonOr,productType1,transactionType1 ,comparison, compareNumber,userId);
+        System.out.println(comparison);
+        System.out.println("checkDebitOrSavingMoreFifty"+sql);
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class));
+
+
     }
 }
 

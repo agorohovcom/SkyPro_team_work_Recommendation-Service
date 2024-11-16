@@ -10,7 +10,8 @@ public enum ComparisonType {
     LESS_THAN("<"),
     EQUALS("="),
     GREATER_THAN_OR_EQUAL(">="),
-    LESS_THAN_OR_EQUAL("<=");
+    LESS_THAN_OR_EQUAL("<="),
+    OR("||");
 
     private final String operator;
 
