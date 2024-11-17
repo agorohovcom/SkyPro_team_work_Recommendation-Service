@@ -31,7 +31,17 @@ public class OpenApiConfig {
                 io.swagger.v3.oas.models.OpenAPI yamlOpenAPI = parser.readContents(
                         new String(inputStream.readAllBytes()), null, options).getOpenAPI();
 
-                openApi.paths(yamlOpenAPI.getPaths());
+                // Объединяем данные из openapi.yaml с автоматически сгенерированной документацией
+                if (yamlOpenAPI.getPaths() != null) {
+                    openApi.getPaths().putAll(yamlOpenAPI.getPaths());
+                }
+                if (yamlOpenAPI.getComponents() != null) {
+                    if (openApi.getComponents() == null) {
+                        openApi.setComponents(yamlOpenAPI.getComponents());
+                    } else {
+                        openApi.getComponents().getSchemas().putAll(yamlOpenAPI.getComponents().getSchemas());
+                    }
+                }
             } catch (Exception e) {
                 throw new RuntimeException("Failed to load OpenAPI YAML", e);
             }
