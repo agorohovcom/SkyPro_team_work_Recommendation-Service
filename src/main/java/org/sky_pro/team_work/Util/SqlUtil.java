@@ -42,7 +42,6 @@ public class SqlUtil {
 
     public static String transactionSumCompareDepositWithdraw(ProductType productType, ComparisonType comparison,
                                                               UUID user) {
-        System.out.println(comparison);
         return String.format("""
                 SELECT SUM(CASE WHEN p.TYPE = '%s' and t.TYPE = 'DEPOSIT' THEN AMOUNT ELSE 0 END) %s
                 SUM(CASE WHEN p.TYPE = '%s' and t.TYPE = 'WITHDRAW' THEN AMOUNT ELSE 0 END)

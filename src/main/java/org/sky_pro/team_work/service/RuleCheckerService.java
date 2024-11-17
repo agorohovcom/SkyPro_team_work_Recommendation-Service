@@ -21,7 +21,6 @@ public class RuleCheckerService {
 
     public boolean checkUserByRule(UUID userId, Rule rule) {
         for (Query query : rule.getQuery()) {
-            System.out.println(query.getQueryType());
             boolean result = switch (query.getQueryType()) {
                 case USER_OF -> repository.checkUserOf(userId, ProductType.valueOf(query.getArguments().get(0)));
                 case ACTIVE_USER_OF ->

@@ -24,7 +24,7 @@ databaseChangeLog:
                   valueComputed: (SELECT MAX(id) FROM rule)
               - column:
                   name: query_type
-                  value: 0
+                  value: 'USER_OF'
               - column:
                   name: arguments
                   value: '{DEBIT}'
@@ -40,7 +40,7 @@ databaseChangeLog:
                   valueComputed: (SELECT MAX(id) FROM rule)
               - column:
                   name: query_type
-                  value: 4
+                  value: 'PRODUCT_OR_PRODUCT_SUMS_DEPOSIT_MORE_VALUE'
               - column:
                   name: arguments
                   value: '{DEBIT, DEPOSIT, >=, 50000, SAVING, DEPOSIT, >=, 50000}'
@@ -56,7 +56,7 @@ databaseChangeLog:
                   valueComputed: (SELECT MAX(id) FROM rule)
               - column:
                   name: query_type
-                  value: 1
+                  value: 'TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW'
               - column:
                   name: arguments
                   value: '{DEBIT, >}'
