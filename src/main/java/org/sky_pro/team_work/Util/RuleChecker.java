@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Component
 public class RuleChecker {
-    private  final RecommendationsRepository repository;
+    private final RecommendationsRepository repository;
 
     public boolean checkUserByRule(UUID userId, Rule rule) {
         for (Query query : rule.getQuery()) {
@@ -26,15 +26,26 @@ public class RuleChecker {
                 case USER_OF -> repository.checkUserOf(userId, ProductType.valueOf(query.getArguments().get(0)));
                 case ACTIVE_USER_OF ->
                         repository.checkActiveUserOf(userId, ProductType.valueOf(query.getArguments().get(0)));
+
                 case TRANSACTION_SUM_COMPARE -> repository.checkTransactionSumCompare(userId,
                         ProductType.valueOf(query.getArguments().get(0)),
                         TransactionType.valueOf(query.getArguments().get(1)),
                         ComparisonType.fromOperator(query.getArguments().get(2)),
                         Integer.parseInt(query.getArguments().get(3)));
+
                 case TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW ->
                         repository.checkTransactionSumCompareDepositWithdraw(userId,
                                 ProductType.valueOf(query.getArguments().get(0)),
                                 ComparisonType.fromOperator(query.getArguments().get(1)));
+
+                case DEBIT_OR_SAVING_MORE_FIFTY -> repository.checkDebitOrSavingMoreFifty(userId,
+                        ProductType.valueOf(query.getArguments().get(0)),
+                        TransactionType.valueOf(query.getArguments().get(1)),
+                        ComparisonType.fromOperator(query.getArguments().get(5)),
+                        ProductType.valueOf(query.getArguments().get(2)),
+                        TransactionType.valueOf(query.getArguments().get(1)),
+                        ComparisonType.fromOperator(query.getArguments().get(3)),
+                        Integer.parseInt(query.getArguments().get(3)));//   !проверить, чтобы под индексом 3 было 50000
             };
 
             if (query.getNegate() != null && query.getNegate()) {

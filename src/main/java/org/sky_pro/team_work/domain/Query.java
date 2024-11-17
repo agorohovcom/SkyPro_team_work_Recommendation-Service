@@ -14,10 +14,13 @@ import java.util.List;
 @Embeddable
 @ToString
 public class Query {
+
  @JsonProperty("query")
  private QueryType queryType;
+
  @JsonProperty("arguments")
  private List<String> arguments;
+
  @JsonProperty("negate")
  private Boolean negate;
 }
