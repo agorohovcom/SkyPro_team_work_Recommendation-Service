@@ -24,4 +24,8 @@ public class RuleController {
         return service.add(rule);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteRule(@PathVariable Long id) {
+        service.delete(id);
+    }
 }

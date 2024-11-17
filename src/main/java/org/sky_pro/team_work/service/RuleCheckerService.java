@@ -1,4 +1,4 @@
-package org.sky_pro.team_work.Util;
+package org.sky_pro.team_work.service;
 
 
 import lombok.Data;
@@ -11,17 +11,17 @@ import org.sky_pro.team_work.enums.TransactionType;
 import org.sky_pro.team_work.repository.RecommendationsRepository;
 import org.springframework.stereotype.Component;
 
-
 import java.util.UUID;
 
 @Data
 @RequiredArgsConstructor
 @Component
-public class RuleChecker {
+public class RuleCheckerService {
     private final RecommendationsRepository repository;
 
     public boolean checkUserByRule(UUID userId, Rule rule) {
         for (Query query : rule.getQuery()) {
+            System.out.println(query.getQueryType());
             boolean result = switch (query.getQueryType()) {
                 case USER_OF -> repository.checkUserOf(userId, ProductType.valueOf(query.getArguments().get(0)));
                 case ACTIVE_USER_OF ->
@@ -38,14 +38,15 @@ public class RuleChecker {
                                 ProductType.valueOf(query.getArguments().get(0)),
                                 ComparisonType.fromOperator(query.getArguments().get(1)));
 
-                case DEBIT_OR_SAVING_MORE_FIFTY -> repository.checkDebitOrSavingMoreFifty(userId,
+                case PRODUCT_OR_PRODUCT_SUMS_DEPOSIT_MORE_VALUE -> repository.checkProductOrProductSumMoreMoreValue(userId,
                         ProductType.valueOf(query.getArguments().get(0)),
                         TransactionType.valueOf(query.getArguments().get(1)),
-                        ComparisonType.fromOperator(query.getArguments().get(5)),
-                        ProductType.valueOf(query.getArguments().get(2)),
-                        TransactionType.valueOf(query.getArguments().get(1)),
-                        ComparisonType.fromOperator(query.getArguments().get(3)),
-                        Integer.parseInt(query.getArguments().get(3)));//   !проверить, чтобы под индексом 3 было 50000
+                        ComparisonType.fromOperator(query.getArguments().get(2)),
+                        Integer.parseInt(query.getArguments().get(3)),
+                        ProductType.valueOf(query.getArguments().get(4)),
+                        TransactionType.valueOf(query.getArguments().get(5)),
+                        ComparisonType.fromOperator(query.getArguments().get(6)),
+                        Integer.parseInt(query.getArguments().get(7)));
             };
 
             if (query.getNegate() != null && query.getNegate()) {

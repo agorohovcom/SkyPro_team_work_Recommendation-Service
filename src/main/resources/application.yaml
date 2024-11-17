@@ -10,3 +10,4 @@ application:
   recommendations-db:
     url: jdbc:h2:file:./transaction
 
+

@@ -1,0 +1,65 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: sergey_white
+      changes:
+        - insert:
+            tableName: rule
+            columns:
+              - column:
+                  name: product_name
+                  value: 'Top Saving'
+              - column:
+                  name: product_id
+                  value: '59efc529-2fff-41af-baff-90ccd7402925'
+              - column:
+                  name: product_text
+                  value: 'Откройте свою собственную «Копилку» с нашим банком! «Копилка» — это уникальный банковский инструмент, который поможет вам легко и удобно накапливать деньги на важные цели'
+
+        - insert:
+            tableName: query
+            columns:
+              - column:
+                  name: rule_id
+                  valueComputed: (SELECT MAX(id) FROM rule)
+              - column:
+                  name: query_type
+                  value: 0
+              - column:
+                  name: arguments
+                  value: '{DEBIT}'
+              - column:
+                  name: negate
+                  value: 'false'
+
+        - insert:
+            tableName: query
+            columns:
+              - column:
+                  name: rule_id
+                  valueComputed: (SELECT MAX(id) FROM rule)
+              - column:
+                  name: query_type
+                  value: 4
+              - column:
+                  name: arguments
+                  value: '{DEBIT, DEPOSIT, >=, 50000, SAVING, DEPOSIT, >=, 50000}'
+              - column:
+                  name: negate
+                  value: 'false'
+
+        - insert:
+            tableName: query
+            columns:
+              - column:
+                  name: rule_id
+                  valueComputed: (SELECT MAX(id) FROM rule)
+              - column:
+                  name: query_type
+                  value: 1
+              - column:
+                  name: arguments
+                  value: '{DEBIT, >}'
+              - column:
+                  name: negate
+                  value: 'false'

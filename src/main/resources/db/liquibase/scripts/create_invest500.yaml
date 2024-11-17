@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: sergey_white
+      changes:
+        - insert:
+            tableName: rule
+            columns:
+              - column:
+                  name: product_name
+                  value: 'Invest 500'
+              - column:
+                  name: product_id
+                  value: '147f6a0f-3b91-413b-ab99-87f081d60d5a'
+              - column:
+                  name: product_text
+                  value: 'Откройте свой путь к успеху с индивидуальным инвестиционным счетом (ИИС) от нашего банка!
+                   Воспользуйтесь налоговыми льготами и начните инвестировать с умом.'
+
+        - insert:
+            tableName: query
+            columns:
+              - column:
+                  name: rule_id
+                  valueComputed: (SELECT MAX(id) FROM rule)
+              - column:
+                  name: query_type
+                  value: 0
+              - column:
+                  name: arguments
+                  value: '{DEBIT}'
+              - column:
+                  name: negate
+                  value: 'false'
+
+        - insert:
+            tableName: query
+            columns:
+              - column:
+                  name: rule_id
+                  valueComputed: (SELECT MAX(id) FROM rule)
+              - column:
+                  name: query_type
+                  value: 0
+              - column:
+                  name: arguments
+                  value: '{INVEST}'
+              - column:
+                  name: negate
+                  value: 'true'
+
+        - insert:
+            tableName: query
+            columns:
+              - column:
+                  name: rule_id
+                  valueComputed: (SELECT MAX(id) FROM rule)
+              - column:
+                  name: query_type
+                  value: 3
+              - column:
+                  name: arguments
+                  value: '{SAVING, DEPOSIT, >, 1000}'
+              - column:
+                  name: negate
+                  value: 'false'
