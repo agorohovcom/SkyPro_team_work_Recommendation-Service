@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @Embeddable
 @ToString
+//@Schema(name = "УКапеупиквлпорквплоарвплоурпловарпо")
 public class Query {
 
  @JsonProperty("query")

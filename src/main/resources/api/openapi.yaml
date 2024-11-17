@@ -1,0 +1,35 @@
+openapi: 3.0.3
+info:
+  title: Recommendations API
+  description: API documentation for Recommendations
+  version: 1.0.0
+paths:
+  /recommendation/{user_Id}:
+    get:
+      summary: Get personal recommendations for user by id
+      parameters:
+        - name: user_Id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Found the recommendations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecommendationDto'
+        "400":
+          description: Invalid id supplied
+          content:
+            application/json:
+              schema:
+                type: object
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
