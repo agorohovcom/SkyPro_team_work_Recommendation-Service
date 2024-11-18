@@ -20,7 +20,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
               - column:
                   name: product_text
-                  type: VARCHAR(255)
+                  type: TEXT[]
 
         - createTable:
             tableName: query
