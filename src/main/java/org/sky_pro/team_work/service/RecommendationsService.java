@@ -14,6 +14,7 @@ public class RecommendationsService {
 
     private final RuleCheckerService ruleChecker;
     private final RuleService ruleService;
+    private final RuleStatisticService ruleStatisticService;
 
 
     public List<Recommendation> getRecommendations(UUID userId) {
@@ -21,6 +22,7 @@ public class RecommendationsService {
         List<Recommendation> recommendations = new ArrayList<>();
         for (Rule rule : rules) {
             if (ruleChecker.checkUserByRule(userId, rule)) {
+                ruleStatisticService.incrementCountByRuleId(rule.getId());
                 recommendations.add(new Recommendation(UUID.randomUUID(), rule.getProductName(), rule.getProductText()));
             }
         }

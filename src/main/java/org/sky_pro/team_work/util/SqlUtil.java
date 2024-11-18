@@ -1,4 +1,4 @@
-package org.sky_pro.team_work.Util;
+package org.sky_pro.team_work.util;
 
 import org.sky_pro.team_work.enums.ComparisonType;
 import org.sky_pro.team_work.enums.ProductType;

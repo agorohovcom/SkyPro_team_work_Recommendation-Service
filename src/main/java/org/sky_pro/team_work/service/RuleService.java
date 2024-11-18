@@ -3,6 +3,8 @@ package org.sky_pro.team_work.service;
 
 import lombok.RequiredArgsConstructor;
 import org.sky_pro.team_work.domain.Rule;
+import org.sky_pro.team_work.domain.RuleStatistic;
+import org.sky_pro.team_work.dto.RuleStatisticDto;
 import org.sky_pro.team_work.repository.RuleRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -31,4 +33,16 @@ public class RuleService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    public List<RuleStatisticDto> getRuleStatistics() {
+        return repository.findAll().stream()
+                .map(rule -> {
+                    RuleStatistic ruleStatistic = rule.getRuleStatistic() != null
+                            ? rule.getRuleStatistic()
+                            : new RuleStatistic(rule.getId(), 0);
+                    return new RuleStatisticDto(rule.getId(), ruleStatistic.getCount());
+                })
+                .toList();
+    }
 }
+

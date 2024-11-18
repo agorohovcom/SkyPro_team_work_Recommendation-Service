@@ -1,6 +1,6 @@
 package org.sky_pro.team_work.repository;
 
-import org.sky_pro.team_work.Util.SqlUtil;
+import org.sky_pro.team_work.util.SqlUtil;
 import org.sky_pro.team_work.enums.ComparisonType;
 import org.sky_pro.team_work.enums.ProductType;
 import org.sky_pro.team_work.enums.TransactionType;

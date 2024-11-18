@@ -5,6 +5,9 @@ spring:
     password:  chocolatefrog
   liquibase:
     change-log: classpath:db/liquibase/changelog-master.yml
+  jpa:
+    hibernate:
+        ddl-auto: update
 
 application:
   recommendations-db:
