@@ -26,7 +26,7 @@ databaseChangeLog:
                   valueComputed: (SELECT MAX(id) FROM rule)
               - column:
                   name: query_type
-                  value: 0
+                  value: 'USER_OF'
               - column:
                   name: arguments
                   value: '{CREDIT}'
@@ -42,7 +42,7 @@ databaseChangeLog:
                   valueComputed: (SELECT MAX(id) FROM rule)
               - column:
                   name: query_type
-                  value: 1
+                  value: 'TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW'
               - column:
                   name: arguments
                   value: '{DEBIT, >,DEBIT}'
@@ -58,7 +58,7 @@ databaseChangeLog:
                   valueComputed: (SELECT MAX(id) FROM rule)
               - column:
                   name: query_type
-                  value: 3
+                  value: 'TRANSACTION_SUM_COMPARE'
               - column:
                   name: arguments
                   value: '{DEBIT, WITHDRAW, >, 100000}'
