@@ -1,6 +1,7 @@
 package org.sky_pro.team_work.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -31,8 +32,10 @@ public class Rule {
 
     @ElementCollection
     @CollectionTable(name = "query", joinColumns = @JoinColumn(name = "rule_id"))
-
     @JsonProperty("rule")
     private List<Query> query;
 
+    @OneToOne(mappedBy = "rule", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private RuleStatistic ruleStatistic;
 }
