@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-
 @Service
 @RequiredArgsConstructor
 public class RecommendationsService {
@@ -15,7 +14,6 @@ public class RecommendationsService {
     private final RuleCheckerService ruleChecker;
     private final RuleService ruleService;
     private final RuleStatisticService ruleStatisticService;
-
 
     public List<Recommendation> getRecommendations(UUID userId) {
         List<Rule> rules = ruleService.getAll();
