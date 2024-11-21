@@ -1,6 +1,5 @@
 package org.sky_pro.team_work.domain;
 
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -9,7 +8,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
-
 
 @Setter
 @Getter

@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-
 import java.util.UUID;
-
 
 @Repository
 public class RecommendationsRepository {
@@ -50,7 +48,6 @@ public class RecommendationsRepository {
         String sql = SqlUtil.productOrProductTransactionTypeSumMoreMoreValue(productType1, transactionType1, comparison1,
                 value1, productType2, transactionType2, comparison2, value2, user);
         return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class));
-
     }
 }
 

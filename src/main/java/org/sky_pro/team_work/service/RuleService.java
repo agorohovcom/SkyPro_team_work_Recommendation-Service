@@ -1,6 +1,5 @@
 package org.sky_pro.team_work.service;
 
-
 import lombok.RequiredArgsConstructor;
 import org.sky_pro.team_work.domain.Rule;
 import org.sky_pro.team_work.domain.RuleStatistic;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 @RequiredArgsConstructor
 public class RuleService {
@@ -21,7 +19,8 @@ public class RuleService {
 
     @Cacheable("rules")
     public List<Rule> getAll() {
-        return repository.findAll();
+//        return repository.findAll();
+        return repository.findAllWithQueries();
     }
 
     @CacheEvict(value = "rules", allEntries = true)
