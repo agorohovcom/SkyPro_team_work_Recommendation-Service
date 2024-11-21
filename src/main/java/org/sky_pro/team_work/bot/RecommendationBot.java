@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.sky_pro.team_work.bot.command.Command;
 import org.sky_pro.team_work.bot.command.CommandKeeper;
+import org.sky_pro.team_work.bot.configuration.BotConfig;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;

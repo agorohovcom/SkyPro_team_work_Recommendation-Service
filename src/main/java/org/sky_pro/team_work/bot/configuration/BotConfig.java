@@ -1,4 +1,4 @@
-package org.sky_pro.team_work.bot;
+package org.sky_pro.team_work.bot.configuration;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

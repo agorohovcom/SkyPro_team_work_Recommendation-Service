@@ -1,4 +1,4 @@
-package org.sky_pro.team_work.bot;
+package org.sky_pro.team_work.bot.dto;
 
 import lombok.Data;
 import org.sky_pro.team_work.domain.Recommendation;

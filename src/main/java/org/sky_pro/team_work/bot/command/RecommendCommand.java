@@ -2,7 +2,7 @@ package org.sky_pro.team_work.bot.command;
 
 import lombok.RequiredArgsConstructor;
 import org.sky_pro.team_work.bot.BotService;
-import org.sky_pro.team_work.bot.UserDto;
+import org.sky_pro.team_work.bot.dto.UserDto;
 import org.sky_pro.team_work.domain.Recommendation;
 import org.sky_pro.team_work.service.RecommendationsService;
 import org.springframework.stereotype.Component;
