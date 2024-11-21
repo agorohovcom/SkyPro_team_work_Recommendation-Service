@@ -13,4 +13,8 @@ application:
   recommendations-db:
     url: jdbc:h2:file:./transaction
 
-
+# По-хорошему это надо в переменные окружения сохранить
+telegram:
+  bot:
+    token: 7939717113:AAE-cj52Rxtk4RE20TuRNbhn1Qfg0bkFWW8
+    username: RecommendationBot
