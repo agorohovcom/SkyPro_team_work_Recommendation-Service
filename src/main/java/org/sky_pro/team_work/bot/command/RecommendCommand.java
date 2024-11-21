@@ -51,7 +51,7 @@ public class RecommendCommand implements Command {
         StringBuilder recommendations = new StringBuilder();
         for (Recommendation r : user.getRecommendations()) {
             recommendations
-                    .append(" ")
+                    .append("\n∎ ")
                     .append(r.getName())
                     .append("\n\n")
                     .append(r.getText())
@@ -61,7 +61,6 @@ public class RecommendCommand implements Command {
                 Здравствуйте, %s %s.
                 
                 Новые продукты для вас:
-                
                 %s
                 """, user.getFirstName(), user.getLastName(), recommendations);
     }
