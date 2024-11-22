@@ -5,9 +5,15 @@ _Данная командная работа выполнена в рамках
 [текст описания проекта]
 
 ## Используемые технологии
-* технология 1
-* технология 2
-* технология 3
+* Java 21
+* Spring Boot 3.3.5
+* H2 Database
+* PostgreSQL
+* Liquibase
+* Lombok
+* OpenAPI Swagger
+* JUnit
+* Mockito
 
 ## Команда разработки:
 * [Сергей Белый](https://github.com/sergeywhite86)
@@ -15,4 +21,4 @@ _Данная командная работа выполнена в рамках
 * [Александр Горохов](https://github.com/agorohovcom)
 
 ## Wiki проекта
-Более подробная информация о проекте размещена в [**Wiki на GitHub**](https://github.com/sergeywhite86/team_work/wiki).
+Подробная информация о проекте размещена в [**Wiki на GitHub**](https://github.com/sergeywhite86/team_work/wiki).
