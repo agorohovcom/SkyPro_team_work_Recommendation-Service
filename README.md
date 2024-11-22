@@ -17,7 +17,7 @@ _Данная командная работа выполнена в рамках
 * JUnit
 * Mockito
 
-## Команда разработки:
+## Команда разработки
 * [Сергей Белый](https://github.com/sergeywhite86)
 * [Мирсаитов Камиль](https://github.com/3dSpace116)
 * [Александр Горохов](https://github.com/agorohovcom)
