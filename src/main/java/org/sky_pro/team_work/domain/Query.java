@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.sky_pro.team_work.enums.QueryType;
 
 import java.util.List;
@@ -15,6 +13,8 @@ import java.util.List;
 @Getter
 @Embeddable
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Query {
 
  @JsonProperty("query")

@@ -2,6 +2,9 @@ package org.sky_pro.team_work.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.sky_pro.team_work.domain.Rule;
+import org.sky_pro.team_work.dto.RuleDto;
+import org.sky_pro.team_work.mapper.Mapper;
+import org.sky_pro.team_work.response.RuleResponse;
 import org.sky_pro.team_work.dto.RuleStatisticDto;
 import org.sky_pro.team_work.response.StatisticResponse;
 import org.sky_pro.team_work.service.RuleService;
@@ -13,26 +16,27 @@ import java.util.List;
 @RequestMapping("/rule")
 @RequiredArgsConstructor
 public class RuleController {
-    private final RuleService ruleService;
+    private final RuleService service;
+    private final Mapper mapper;
 
     @GetMapping
-    public List<Rule> getRules() {
-        return ruleService.getAll();
+    public RuleResponse getRules() {
+        return new RuleResponse(service.getAllRulesDto());
     }
 
     @PostMapping
-    public Rule addRule(@RequestBody Rule rule) {
-        return ruleService.add(rule);
+    public Rule addRule(@RequestBody RuleDto ruleDto) {
+        return service.add(mapper.RuleDtoToRule(ruleDto));
     }
 
     @DeleteMapping("/{id}")
     public void deleteRule(@PathVariable Long id) {
-        ruleService.delete(id);
+        service.delete(id);
     }
 
     @GetMapping("/stats")
     public StatisticResponse getRuleStatistics() {
-        List<RuleStatisticDto> stats = ruleService.getRuleStatistics();
+        List<RuleStatisticDto> stats = service.getRuleStatistics();
         return new StatisticResponse(stats);
     }
 }
