@@ -1,10 +1,8 @@
 package org.sky_pro.team_work.util;
 
 import org.sky_pro.team_work.enums.ComparisonType;
-import org.sky_pro.team_work.enums.ProductType;
-import org.sky_pro.team_work.enums.TransactionType;
 
-import java.util.UUID;
+
 
 public class SqlUtil {
 
@@ -12,60 +10,51 @@ public class SqlUtil {
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
-    public static String userOf(UUID user, ProductType type) {
-        return String.format("""
+    public static String userOf() {
+        return """
                 SELECT TOP 1 EXISTS(SELECT 1 FROM PRODUCTS p
                 JOIN TRANSACTIONS t ON t.PRODUCT_ID = p.ID
-                WHERE t.USER_ID = '%s' and p.TYPE = '%s')
+                WHERE t.USER_ID = ? and p.TYPE = ?)
                 FROM PRODUCTS
-                """, user, type);
+                """;
     }
 
-    public static String activeUserOf(ProductType productType, UUID user) {
-        return String.format("""
-                SELECT CASE WHEN COUNT('%s') > 5 THEN TRUE
+    public static String activeUserOf() {
+        return """
+                SELECT CASE WHEN COUNT(?) > 5 THEN TRUE
                 ELSE FALSE END FROM PRODUCTS p
                 JOIN TRANSACTIONS t ON t.PRODUCT_ID = p.ID
-                WHERE t.USER_ID = '%s'
-                """, productType, user);
+                WHERE t.USER_ID = ?
+                """;
     }
 
-    public static String transactionSumCompare(ProductType productType, TransactionType transactionType,
-                                               ComparisonType comparison, Integer compareNumber, UUID user) {
+    public static String transactionSumCompare(ComparisonType comparison) {
         return String.format("""
-                SELECT SUM(CASE WHEN p.TYPE = '%s' and t.TYPE = '%s' THEN AMOUNT ELSE 0 END)
-                %s %d FROM PRODUCTS p
+                SELECT SUM(CASE WHEN p.TYPE = ? and t.TYPE = ? THEN AMOUNT ELSE 0 END)
+                %s ? FROM PRODUCTS p
                 JOIN TRANSACTIONS t ON t.PRODUCT_ID = p.ID
-                WHERE t.USER_ID = '%s'
-                """, productType, transactionType, comparison.getOperator(), compareNumber, user);
+                WHERE t.USER_ID = ?
+                """, comparison.getOperator());
     }
 
-    public static String transactionSumCompareDepositWithdraw(ProductType productType, ComparisonType comparison,
-                                                              UUID user) {
+    public static String transactionSumCompareDepositWithdraw(ComparisonType comparison) {
         return String.format("""
-                SELECT SUM(CASE WHEN p.TYPE = '%s' and t.TYPE = 'DEPOSIT' THEN AMOUNT ELSE 0 END) %s
-                SUM(CASE WHEN p.TYPE = '%s' and t.TYPE = 'WITHDRAW' THEN AMOUNT ELSE 0 END)
+                SELECT SUM(CASE WHEN p.TYPE = ? and t.TYPE = 'DEPOSIT' THEN AMOUNT ELSE 0 END) %s
+                SUM(CASE WHEN p.TYPE = ? and t.TYPE = 'WITHDRAW' THEN AMOUNT ELSE 0 END)
                 FROM PRODUCTS p
                 JOIN TRANSACTIONS t ON t.PRODUCT_ID = p.ID
-                WHERE t.USER_ID = '%s'
-                """, productType, comparison.getOperator(), productType, user);
+                WHERE t.USER_ID = ?
+                """, comparison.getOperator());
     }
 
-    public static String productOrProductTransactionTypeSumMoreMoreValue(ProductType productType1,
-                                                                         TransactionType transactionType1,
-                                                                         ComparisonType comparison1,
-                                                                         Integer value1, ProductType productType2,
-                                                                         TransactionType transactionType2,
-                                                                         ComparisonType comparison2, Integer value2,
-                                                                         UUID user) {
+    public static String productOrProductTransactionTypeSumMoreMoreValue(ComparisonType comparison1,
+                                                                         ComparisonType comparison2) {
         return String.format("""
-                        SELECT SUM(CASE WHEN p.TYPE ='%s' and t.TYPE ='%s' THEN AMOUNT ELSE 0 END) %s %d or
-                        SUM(CASE WHEN p.TYPE = '%s' and t.TYPE = '%s' THEN AMOUNT ELSE 0 END) %s %d
-                        FROM PRODUCTS p
-                        JOIN TRANSACTIONS t ON t.PRODUCT_ID = p.ID
-                        WHERE t.USER_ID = '%s'
-                        """, productType1, transactionType1, comparison1.getOperator(), value1, productType2, transactionType2,
-                comparison2.getOperator(), value2, user);
-
+                SELECT SUM(CASE WHEN p.TYPE = ? and t.TYPE = ? THEN AMOUNT ELSE 0 END) %s ? or
+                SUM(CASE WHEN p.TYPE = ? and t.TYPE = ? THEN AMOUNT ELSE 0 END) %s ?
+                FROM PRODUCTS p
+                JOIN TRANSACTIONS t ON t.PRODUCT_ID = p.ID
+                WHERE t.USER_ID = ?
+                """, comparison1.getOperator(), comparison2.getOperator());
     }
 }

@@ -19,24 +19,27 @@ public class RecommendationsRepository {
     }
 
     public boolean checkUserOf(UUID userId, ProductType productType) {
-        String sql = SqlUtil.userOf(userId, productType);
-        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class));
+        String sql = SqlUtil.userOf();
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class, userId, productType.toString()));
     }
 
     public boolean checkActiveUserOf(UUID userId, ProductType productType) {
-        String sql = SqlUtil.activeUserOf(productType, userId);
-        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class));
+        String sql = SqlUtil.activeUserOf();
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class, productType.toString(), userId));
     }
 
     public boolean checkTransactionSumCompare(UUID userId, ProductType productType, TransactionType transactionType,
                                               ComparisonType comparison, Integer compareNumber) {
-        String sql = SqlUtil.transactionSumCompare(productType, transactionType, comparison, compareNumber, userId);
-        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class));
+        String sql = SqlUtil.transactionSumCompare(comparison);
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class,
+                productType.toString(), transactionType.toString(), compareNumber, userId));
     }
 
-    public boolean checkTransactionSumCompareDepositWithdraw(UUID userId, ProductType productType, ComparisonType comparison) {
-        String sql = SqlUtil.transactionSumCompareDepositWithdraw(productType, comparison, userId);
-        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class));
+    public boolean checkTransactionSumCompareDepositWithdraw(UUID userId, ProductType productType,
+                                                             ComparisonType comparison) {
+        String sql = SqlUtil.transactionSumCompareDepositWithdraw(comparison);
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class, productType.toString(),
+                productType.toString(), userId.toString()));
     }
 
     public boolean checkProductOrProductSumMoreMoreValue(UUID user, ProductType productType1,
@@ -45,10 +48,10 @@ public class RecommendationsRepository {
                                                          Integer value1, ProductType productType2,
                                                          TransactionType transactionType2,
                                                          ComparisonType comparison2, Integer value2) {
-        String sql = SqlUtil.productOrProductTransactionTypeSumMoreMoreValue(productType1, transactionType1, comparison1,
-                value1, productType2, transactionType2, comparison2, value2, user);
-        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class));
+        String sql = SqlUtil.productOrProductTransactionTypeSumMoreMoreValue(comparison1, comparison2);
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class,
+                productType1.toString(), transactionType1.toString(), value1,
+                productType2.toString(), transactionType2.toString(), value2,
+                user.toString()));
     }
 }
-
-
