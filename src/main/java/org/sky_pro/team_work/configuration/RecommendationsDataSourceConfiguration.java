@@ -42,6 +42,6 @@ public class RecommendationsDataSourceConfiguration {
 
     @Bean
     public CacheManager cacheManager() {
-        return new ConcurrentMapCacheManager("rules");
+        return new ConcurrentMapCacheManager("rules", "rules_dto");
     }
 }
