@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/recommendationDB
+    url: jdbc:postgresql://localhost:5432/recommendationDB
     username:  student
     password:  chocolatefrog
   liquibase:
