@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/recommendationDB
+    url: jdbc:postgresql://localhost:5433/recommendationDB
     username:  student
     password:  chocolatefrog
   liquibase:
@@ -12,6 +12,7 @@ spring:
 application:
   recommendations-db:
     url: jdbc:h2:file:./transaction
+  version: 0.0.1-SNAPSHOT
 
 # По-хорошему это надо в переменные окружения сохранить
 telegram:

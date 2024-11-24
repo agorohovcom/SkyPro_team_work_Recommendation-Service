@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.sky_pro</groupId>
     <artifactId>team_work</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${app.version}</version>
     <name>team_work</name>
     <description>team_work</description>
     <url/>
