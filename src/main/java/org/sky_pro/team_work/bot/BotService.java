@@ -20,8 +20,8 @@ public class BotService {
     }
 
     public List<UserDto> findByUsername(String username) {
-        String sql = String.format("SELECT * FROM USERS WHERE USERNAME = '%s'", username);
-        return jdbcTemplate.query(sql, new UserRowMapper());
+        String sql = "SELECT * FROM USERS WHERE USERNAME = ?";
+        return jdbcTemplate.query(sql, new UserRowMapper(), username);
     }
 
     public static class UserRowMapper implements RowMapper<UserDto> {
