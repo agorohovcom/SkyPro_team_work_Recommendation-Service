@@ -12,7 +12,7 @@ spring:
 application:
   recommendations-db:
     url: jdbc:h2:file:./transaction
-  version: 0.0.1-SNAPSHOT
+
 
 # По-хорошему это надо в переменные окружения сохранить
 telegram:
