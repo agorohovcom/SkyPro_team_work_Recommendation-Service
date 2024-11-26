@@ -18,6 +18,11 @@ public class RecommendationsRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    public boolean isUserExistsById(UUID userId) {
+        String sql = SqlUtil.isUserExistsById();
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class, userId.toString()));
+    }
+
     public boolean checkUserOf(UUID userId, ProductType productType) {
         String sql = SqlUtil.userOf();
         return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, Boolean.class, userId, productType.toString()));
