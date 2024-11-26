@@ -20,9 +20,6 @@ public class RuleCheckerService {
     private final RecommendationsRepository repository;
 
     public boolean checkUserByRule(UUID userId, Rule rule) {
-        if(!repository.isUserExistsById(userId)) {
-            throw new UserNotFoundException("Пользователь с id=" + userId + " не найден");
-        }
         for (Query query : rule.getQuery()) {
             boolean result = switch (query.getQueryType()) {
                 case USER_OF -> repository.checkUserOf(userId, ProductType.valueOf(query.getArguments().get(0)));
