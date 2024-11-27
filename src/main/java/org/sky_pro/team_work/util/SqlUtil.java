@@ -2,12 +2,18 @@ package org.sky_pro.team_work.util;
 
 import org.sky_pro.team_work.enums.ComparisonType;
 
-
+import java.util.UUID;
 
 public class SqlUtil {
 
     private SqlUtil() {
         throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
+    public static String isUserExistsById() {
+        return """
+                SELECT EXISTS(SELECT 1 FROM users WHERE id = ?)
+                """;
     }
 
     public static String userOf() {
