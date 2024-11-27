@@ -4,18 +4,16 @@ import org.sky_pro.team_work.domain.Rule;
 import org.sky_pro.team_work.dto.RuleDto;
 import org.springframework.stereotype.Service;
 
-
-
 @Service
 public class Mapper {
 
-    public  Rule RuleDtoToRule(RuleDto dto) {
+    public Rule ruleDtoToRule(RuleDto dto) {
         Rule rule = new Rule();
         rule.setId(dto.getId());
-        rule.setQuery(dto.getQuery());
+        rule.setProductName(dto.getProductName());
+        rule.setProductId(dto.getProductId());
         rule.setProductText(dto.getProductText());
         rule.setQuery(dto.getQuery());
-        rule.setProductId(dto.getProductId());
         return rule;
     }
 }
