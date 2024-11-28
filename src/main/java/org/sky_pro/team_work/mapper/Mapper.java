@@ -11,8 +11,7 @@ public class Mapper {
 
     public  Rule RuleDtoToRule(RuleDto dto) {
         Rule rule = new Rule();
-        rule.setId(dto.getId());
-        rule.setQuery(dto.getQuery());
+        rule.setProductName(dto.getProductName());
         rule.setProductText(dto.getProductText());
         rule.setQuery(dto.getQuery());
         rule.setProductId(dto.getProductId());
