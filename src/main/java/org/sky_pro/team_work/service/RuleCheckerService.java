@@ -7,7 +7,6 @@ import org.sky_pro.team_work.domain.Rule;
 import org.sky_pro.team_work.enums.ComparisonType;
 import org.sky_pro.team_work.enums.ProductType;
 import org.sky_pro.team_work.enums.TransactionType;
-import org.sky_pro.team_work.exception.UserNotFoundException;
 import org.sky_pro.team_work.repository.RecommendationsRepository;
 import org.springframework.stereotype.Component;
 

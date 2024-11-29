@@ -1,6 +1,5 @@
 package org.sky_pro.team_work.dto;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +8,6 @@ import lombok.ToString;
 import org.sky_pro.team_work.domain.Query;
 
 import java.util.List;
-
 
 @Data
 @AllArgsConstructor
