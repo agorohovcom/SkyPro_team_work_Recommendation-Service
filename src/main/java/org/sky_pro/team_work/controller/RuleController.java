@@ -46,8 +46,11 @@ public class RuleController {
     }
 
     @GetMapping("/stats")
-    public StatisticResponse getRuleStatistics() {
+    public ResponseEntity<StatisticResponse> getRuleStatistics() {
         List<RuleStatisticDto> stats = service.getRuleStatistics();
-        return new StatisticResponse(stats);
+        StatisticResponse result = new StatisticResponse(stats);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(result);
     }
 }

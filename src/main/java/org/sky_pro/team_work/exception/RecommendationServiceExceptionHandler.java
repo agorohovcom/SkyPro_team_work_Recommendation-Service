@@ -53,7 +53,7 @@ public class RecommendationServiceExceptionHandler {
             MethodArgumentNotValidException ex) {
         Map<String, Object> errorResponse = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error ->
-                errorResponse.put(error.getField(), error.getDefaultMessage()));
+                errorResponse.put("message", error.getDefaultMessage() + ": " + error.getField()));
         errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
         log.error("Ошибка валидации: {}", ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
