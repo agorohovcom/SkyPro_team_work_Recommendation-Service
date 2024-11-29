@@ -1,7 +1,6 @@
 package org.sky_pro.team_work.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.sky_pro.team_work.domain.Rule;
 import org.sky_pro.team_work.dto.RuleDto;
 import org.sky_pro.team_work.dto.RuleStatisticDto;
 import org.sky_pro.team_work.mapper.Mapper;
@@ -25,8 +24,8 @@ public class RuleController {
     }
 
     @PostMapping
-    public Rule addRule(@RequestBody RuleDto ruleDto) {
-        return service.add(mapper.ruleDtoToRule(ruleDto));
+    public RuleDto addRule(@RequestBody RuleDto ruleDto) {
+        return mapper.ruleToRuleDto(service.add(mapper.ruleDtoToRule(ruleDto)));
     }
 
     @DeleteMapping("/{id}")
