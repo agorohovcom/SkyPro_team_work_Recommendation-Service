@@ -6,6 +6,7 @@ import org.sky_pro.team_work.domain.Rule;
 import org.sky_pro.team_work.domain.RuleStatistic;
 import org.sky_pro.team_work.dto.RuleDto;
 import org.sky_pro.team_work.dto.RuleStatisticDto;
+import org.sky_pro.team_work.exception.RuleNotFoundException;
 import org.sky_pro.team_work.repository.RuleRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -49,6 +50,9 @@ public class RuleService {
 
     @CacheEvict(value = "rules", allEntries = true)
     public void delete(Long id) {
+        if (!repository.existsById(id)) {
+            throw new RuleNotFoundException("Правило с id=" + id + " не найдено");
+        }
         repository.deleteById(id);
     }
 
@@ -63,4 +67,3 @@ public class RuleService {
                 .toList();
     }
 }
-

@@ -23,13 +23,13 @@ import java.util.stream.Collectors;
 public class RecommendationServiceExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleUserNotFoundException(UserNotFoundException re) {
-        String message = re.getMessage();
+    public ResponseEntity<Map<String, Object>> handleUserNotFoundException(UserNotFoundException ex) {
+        String message = ex.getMessage();
         Map<String, Object> errorResponse = new HashMap<>();
         errorResponse.put("message", message);
-        errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
+        errorResponse.put("status", HttpStatus.NOT_FOUND.value());
         log.error(message);
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -56,7 +56,6 @@ public class RecommendationServiceExceptionHandler {
                 errorResponse.put(error.getField(), error.getDefaultMessage()));
         errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
         log.error("Ошибка валидации: {}", ex.getMessage());
-        ex.printStackTrace(System.err);
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
@@ -96,5 +95,16 @@ public class RecommendationServiceExceptionHandler {
         errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
         log.error(message);
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(RuleNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleRuleNotFoundException(
+            RuleNotFoundException ex) {
+        String message = ex.getMessage();
+        Map<String, Object> errorResponse = new HashMap<>();
+        errorResponse.put("message", message);
+        errorResponse.put("status", HttpStatus.NOT_FOUND.value());
+        log.error(message);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 }

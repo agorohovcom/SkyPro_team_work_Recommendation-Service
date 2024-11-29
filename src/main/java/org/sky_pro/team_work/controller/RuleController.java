@@ -8,6 +8,8 @@ import org.sky_pro.team_work.mapper.Mapper;
 import org.sky_pro.team_work.response.RuleResponse;
 import org.sky_pro.team_work.response.StatisticResponse;
 import org.sky_pro.team_work.service.RuleService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,18 +24,25 @@ public class RuleController {
     private final Mapper mapper;
 
     @GetMapping
-    public RuleResponse getRules() {
-        return new RuleResponse(service.getAllRulesDto());
+    public ResponseEntity<RuleResponse> getRules() {
+        RuleResponse result = new RuleResponse(service.getAllRulesDto());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(result);
     }
 
     @PostMapping
-    public RuleDto addRule(@Valid @RequestBody RuleDto ruleDto) {
-        return mapper.ruleToRuleDto(service.add(mapper.ruleDtoToRule(ruleDto)));
+    public ResponseEntity<RuleDto> addRule(@Valid @RequestBody RuleDto ruleDto) {
+        service.add(mapper.ruleDtoToRule(ruleDto));
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(ruleDto);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteRule(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRule(@PathVariable Long id) {
         service.delete(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/stats")
