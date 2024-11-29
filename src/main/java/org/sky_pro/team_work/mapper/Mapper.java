@@ -15,4 +15,13 @@ public class Mapper {
         rule.setProductId(dto.getProductId());
         return rule;
     }
+
+    public RuleDto ruleToRuleDto(Rule rule) {
+        RuleDto ruleDto = new RuleDto();
+        ruleDto.setProductName(rule.getProductName());
+        ruleDto.setProductText(rule.getProductText());
+        ruleDto.setQuery(rule.getQuery());
+        ruleDto.setProductId(rule.getProductId());
+        return ruleDto;
+    }
 }
