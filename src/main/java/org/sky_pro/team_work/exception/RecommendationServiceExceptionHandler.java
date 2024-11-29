@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -55,6 +56,7 @@ public class RecommendationServiceExceptionHandler {
                 errorResponse.put(error.getField(), error.getDefaultMessage()));
         errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
         log.error("Ошибка валидации: {}", ex.getMessage());
+        ex.printStackTrace(System.err);
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
@@ -80,6 +82,17 @@ public class RecommendationServiceExceptionHandler {
             message = "Ошибка чтения сообщения: " + ex.getMessage();
             errorResponse.put("message", message);
         }
+        errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
+        log.error(message);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Map<String, Object>> handleDataIntegrityViolationException(
+            DataIntegrityViolationException ex) {
+        String message = "Ошибка целостности данных: " + ex.getMessage();
+        Map<String, Object> errorResponse = new HashMap<>();
+        errorResponse.put("message", message);
         errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
         log.error(message);
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
