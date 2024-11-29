@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -52,10 +53,11 @@ public class RecommendationServiceExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleMethodArgumentNotValidException(
             MethodArgumentNotValidException ex) {
         Map<String, Object> errorResponse = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error ->
-                errorResponse.put("message", error.getDefaultMessage() + ": " + error.getField()));
+        FieldError firstError = ex.getBindingResult().getFieldErrors().getFirst();
+        String message = firstError.getDefaultMessage() + ": " + firstError.getField();
+        errorResponse.put("message", message);
         errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
-        log.error("Ошибка валидации: {}", ex.getMessage());
+        log.error("Ошибка валидации: {}", message);
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
