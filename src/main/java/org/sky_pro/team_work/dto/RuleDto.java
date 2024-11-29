@@ -1,9 +1,12 @@
 package org.sky_pro.team_work.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.sky_pro.team_work.domain.Query;
 
 import java.util.List;
@@ -11,11 +14,14 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonPropertyOrder({ "id", "productName", "productId", "productText", "query" })
+@ToString
 public class RuleDto {
-    private Long id;
+    @JsonProperty("product_name")
     private String productName;
+    @JsonProperty("product_id")
     private String productId;
+    @JsonProperty("product_text")
     private String productText;
+    @JsonProperty("rule")
     private List<Query> query;
 }

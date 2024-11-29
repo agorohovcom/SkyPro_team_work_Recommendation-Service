@@ -7,13 +7,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class Mapper {
 
-    public Rule ruleDtoToRule(RuleDto dto) {
+    public  Rule RuleDtoToRule(RuleDto dto) {
         Rule rule = new Rule();
-        rule.setId(dto.getId());
         rule.setProductName(dto.getProductName());
-        rule.setProductId(dto.getProductId());
         rule.setProductText(dto.getProductText());
         rule.setQuery(dto.getQuery());
+        rule.setProductId(dto.getProductId());
         return rule;
     }
 }

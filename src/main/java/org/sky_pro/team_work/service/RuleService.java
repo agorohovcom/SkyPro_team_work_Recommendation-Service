@@ -29,7 +29,6 @@ public class RuleService {
         List<Rule> rules = getAll();
         return rules.stream()
                 .map(rule -> new RuleDto(
-                        rule.getId(),
                         rule.getProductName(),
                         rule.getProductId(),
                         rule.getProductText(),
