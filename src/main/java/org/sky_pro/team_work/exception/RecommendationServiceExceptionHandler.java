@@ -3,6 +3,7 @@ package org.sky_pro.team_work.exception;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -38,6 +39,16 @@ public class RecommendationServiceExceptionHandler {
             errorResponse.put("message", ex.getMessage());
             errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
         }
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, Object>> handleMethodArgumentNotValidException(
+            MethodArgumentNotValidException ex) {
+        Map<String, Object> errorResponse = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+                errorResponse.put(error.getField(), error.getDefaultMessage()));
+        errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 }
