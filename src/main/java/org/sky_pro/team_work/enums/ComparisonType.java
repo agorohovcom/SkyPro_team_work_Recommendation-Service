@@ -2,7 +2,6 @@ package org.sky_pro.team_work.enums;
 
 import lombok.Getter;
 
-
 @Getter
 public enum ComparisonType {
 

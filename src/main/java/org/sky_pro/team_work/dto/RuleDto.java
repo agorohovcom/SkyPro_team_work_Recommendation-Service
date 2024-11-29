@@ -1,7 +1,5 @@
 package org.sky_pro.team_work.dto;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
