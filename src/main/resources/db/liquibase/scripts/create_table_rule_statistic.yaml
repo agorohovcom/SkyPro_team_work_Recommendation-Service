@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: agorohov
+      changes:
+        - createTable:
+            tableName: rule_statistic
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: count
+                  type: INTEGER
+              - column:
+                  name: rule_id
+                  type: BIGSERIAL
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: rule_statistic
+            baseColumnNames: rule_id
+            constraintName: fk_rule_statistic_rule
+            referencedTableName: rule
+            referencedColumnNames: id
+            onDelete: CASCADE
