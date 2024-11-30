@@ -7,14 +7,12 @@ spring:
     change-log: classpath:db/liquibase/changelog-master.yml
   jpa:
     hibernate:
-        ddl-auto: update
+      ddl-auto: validate
 
 application:
   recommendations-db:
     url: jdbc:h2:file:./transaction
 
-
-# По-хорошему это надо в переменные окружения сохранить
 telegram:
   bot:
     token: 7939717113:AAE-cj52Rxtk4RE20TuRNbhn1Qfg0bkFWW8

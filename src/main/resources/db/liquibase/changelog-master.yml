@@ -2,6 +2,8 @@ databaseChangeLog:
   - include:
       file: db/liquibase/scripts/create_table_recommendation.yaml
   - include:
+      file: db/liquibase/scripts/create_table_rule_statistic.yaml
+  - include:
       file: db/liquibase/scripts/create_rule_top_saving.yaml
   - include:
       file: db/liquibase/scripts/create_invest500.yaml
