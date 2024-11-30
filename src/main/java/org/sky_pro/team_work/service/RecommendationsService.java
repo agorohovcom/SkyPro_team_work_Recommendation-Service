@@ -40,6 +40,3 @@ public class RecommendationsService {
         }
     }
 }
-//todo изменить в таблице rule тип поля id,чтобы на строке 24 не генерировать рандомный айдишник,а брать из odj rule
-
-
