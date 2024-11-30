@@ -7,7 +7,9 @@ import org.sky_pro.team_work.exception.UserNotFoundException;
 import org.sky_pro.team_work.repository.RecommendationsRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +38,6 @@ public class RecommendationsService {
             throw new UserNotFoundException("Пользователь с id=" + userId + " не найден");
         }
     }
-
 }
 //todo изменить в таблице rule тип поля id,чтобы на строке 24 не генерировать рандомный айдишник,а брать из odj rule
 

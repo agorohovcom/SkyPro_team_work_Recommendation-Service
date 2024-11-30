@@ -47,3 +47,18 @@ databaseChangeLog:
             referencedTableName: rule
             referencedColumnNames: id
             onDelete: CASCADE
+
+        - addUniqueConstraint:
+            tableName: rule
+            columnNames: product_name
+            constraintName: uq_rule_product_name
+
+        - addUniqueConstraint:
+            tableName: rule
+            columnNames: product_id
+            constraintName: uq_rule_product_id
+
+        - addUniqueConstraint:
+            tableName: rule
+            columnNames: product_text
+            constraintName: uq_rule_product_text
