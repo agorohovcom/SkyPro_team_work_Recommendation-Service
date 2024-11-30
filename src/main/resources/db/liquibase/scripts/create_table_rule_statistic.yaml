@@ -21,6 +21,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
 
+        - addUniqueConstraint:
+            tableName: rule_statistic
+            columnNames: rule_id
+            constraintName: uq_rule_statistic_rule_id
+
         - addForeignKeyConstraint:
             baseTableName: rule_statistic
             baseColumnNames: rule_id
