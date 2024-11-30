@@ -27,7 +27,8 @@ public class RecommendationsService {
         for (Rule rule : rules) {
             if (ruleChecker.checkUserByRule(userId, rule)) {
                 ruleStatisticService.incrementCountByRuleId(rule.getId());
-                recommendations.add(new Recommendation(UUID.randomUUID(), rule.getProductName(), rule.getProductText()));
+                recommendations.add(new Recommendation(
+                        UUID.fromString(rule.getProductId()), rule.getProductName(), rule.getProductText()));
             }
         }
         return recommendations;
