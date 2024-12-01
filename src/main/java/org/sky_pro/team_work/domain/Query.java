@@ -7,10 +7,12 @@ import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import org.sky_pro.team_work.enums.QueryType;
-import org.sky_pro.team_work.validation.ValidArgumentType;
 
-import java.util.List;
+
+import java.util.Map;
 
 @Setter
 @Getter
@@ -27,7 +29,8 @@ public class Query {
 
  @JsonProperty("arguments")
  @NotEmpty(message = "Список аргументов не может быть пустым")
- private List<@ValidArgumentType String> arguments;
+ @JdbcTypeCode(SqlTypes.JSON)
+ private Map<String,String> arguments;
 
  @JsonProperty("negate")
  @NotNull(message = "Значение не может отсутствовать")

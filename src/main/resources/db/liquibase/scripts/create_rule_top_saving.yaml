@@ -38,7 +38,7 @@ databaseChangeLog:
                   value: 'USER_OF'
               - column:
                   name: arguments
-                  value: '{DEBIT}'
+                  value: '{"p.type": "DEBIT"}'
               - column:
                   name: negate
                   value: 'false'
@@ -54,7 +54,8 @@ databaseChangeLog:
                   value: 'PRODUCT_OR_PRODUCT_SUMS_DEPOSIT_MORE_VALUE'
               - column:
                   name: arguments
-                  value: '{DEBIT, DEPOSIT, >=, 50000, SAVING, DEPOSIT, >=, 50000}'
+                  value: '{"p.type1": "DEBIT","t.type1": "DEPOSIT","comparison1": ">=","value1": 50000,"p.type2": "SAVING",
+                   "t.type2": "DEPOSIT","comparison2": ">=","value2": 50000}'
               - column:
                   name: negate
                   value: 'false'
@@ -70,7 +71,7 @@ databaseChangeLog:
                   value: 'TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW'
               - column:
                   name: arguments
-                  value: '{DEBIT, >}'
+                  value: '{"p.type": "DEBIT","comparison": ">"}'
               - column:
                   name: negate
                   value: 'false'

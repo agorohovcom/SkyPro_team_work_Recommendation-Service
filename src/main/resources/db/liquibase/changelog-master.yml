@@ -1,6 +1,6 @@
 databaseChangeLog:
   - include:
-      file: db/liquibase/scripts/create_table_recommendation.yaml
+      file: db/liquibase/scripts/create_table_rule.yaml
   - include:
       file: db/liquibase/scripts/create_table_rule_statistic.yaml
   - include:

@@ -40,7 +40,7 @@ databaseChangeLog:
                   value: 'USER_OF'
               - column:
                   name: arguments
-                  value: '{CREDIT}'
+                  value: '{"p.type": "CREDIT"}'
               - column:
                   name: negate
                   value: 'true'
@@ -56,7 +56,7 @@ databaseChangeLog:
                   value: 'TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW'
               - column:
                   name: arguments
-                  value: '{DEBIT, >,DEBIT}'
+                  value: '{"p.type": "DEBIT","comparison": ">","p.type": "DEBIT"}'
               - column:
                   name: negate
                   value: 'false'
@@ -72,7 +72,7 @@ databaseChangeLog:
                   value: 'TRANSACTION_SUM_COMPARE'
               - column:
                   name: arguments
-                  value: '{DEBIT, WITHDRAW, >, 100000}'
+                  value: '{"p.type": "DEBIT","t.type": "WITHDRAW","comparison": ">","value": 100000}'
               - column:
                   name: negate
                   value: 'false'
