@@ -16,7 +16,10 @@ databaseChangeLog:
                   name: product_text
                   value: |
                     Откройте свой путь к успеху с индивидуальным инвестиционным счетом (ИИС) от нашего банка!
-                    Воспользуйтесь налоговыми льготами и начните инвестировать с умом. Пополните счет до конца года и получите выгоду в виде вычета на взнос в следующем налоговом периоде. Не упустите возможность разнообразить свой портфель, снизить риски и следить за актуальными рыночными тенденциями. Откройте ИИС сегодня и станьте ближе к финансовой независимости!
+                    Воспользуйтесь налоговыми льготами и начните инвестировать с умом. Пополните счет до конца года и
+                    получите выгоду в виде вычета на взнос в следующем налоговом периоде. Не упустите возможность 
+                    разнообразить свой портфель, снизить риски и следить за актуальными рыночными тенденциями. 
+                    Откройте ИИС сегодня и станьте ближе к финансовой независимости!
 
         - insert:
             tableName: query
@@ -29,7 +32,7 @@ databaseChangeLog:
                   value: 'USER_OF'
               - column:
                   name: arguments
-                  value: '{"p.type": "DEBIT"}'
+                  value: '["DEBIT"]'
               - column:
                   name: negate
                   value: 'false'
@@ -45,7 +48,7 @@ databaseChangeLog:
                   value: 'USER_OF'
               - column:
                   name: arguments
-                  value: '{"p.type": "INVEST"}'
+                  value: '["INVEST"]'
               - column:
                   name: negate
                   value: 'true'
@@ -61,7 +64,7 @@ databaseChangeLog:
                   value: 'TRANSACTION_SUM_COMPARE'
               - column:
                   name: arguments
-                  value: '{"p.type": "SAVING","t.type": "DEPOSIT","comparison": ">","value": 1000}'
+                  value: '["SAVING", "DEPOSIT", ">", 1000]'
               - column:
                   name: negate
                   value: 'false'

@@ -18,44 +18,44 @@ import java.util.UUID;
 public class RuleCheckerService {
     private final RecommendationsRepository repository;
 
-    public boolean checkUserByRule(UUID userId, Rule rule) {
-        for (Query query : rule.getQuery()) {
-            boolean result = switch (query.getQueryType()) {
-                case USER_OF -> repository.checkUserOf(userId, ProductType.valueOf(query.getArguments().get("p.type")));
-                case ACTIVE_USER_OF ->
-                        repository.checkActiveUserOf(userId, ProductType.valueOf(query.getArguments().get("p.type")));
+public boolean checkUserByRule(UUID userId, Rule rule) {
+    for (Query query : rule.getQuery()) {
+        boolean result = switch (query.getQueryType()) {
+            case USER_OF -> repository.checkUserOf(userId, ProductType.valueOf(query.getArguments().get(0)));
+            case ACTIVE_USER_OF ->
+                    repository.checkActiveUserOf(userId, ProductType.valueOf(query.getArguments().get(0)));
 
-                case TRANSACTION_SUM_COMPARE -> repository.checkTransactionSumCompare(userId,
-                        ProductType.valueOf(query.getArguments().get("p.type")),
-                        TransactionType.valueOf(query.getArguments().get("t.type")),
-                        ComparisonType.fromOperator(query.getArguments().get("comparison")),
-                        Integer.parseInt(query.getArguments().get("value")));
+            case TRANSACTION_SUM_COMPARE -> repository.checkTransactionSumCompare(userId,
+                    ProductType.valueOf(query.getArguments().get(0)),
+                    TransactionType.valueOf(query.getArguments().get(1)),
+                    ComparisonType.fromOperator(query.getArguments().get(2)),
+                    Integer.parseInt(query.getArguments().get(3)));
 
-                case TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW ->
-                        repository.checkTransactionSumCompareDepositWithdraw(userId,
-                                ProductType.valueOf(query.getArguments().get("p.type")),
-                                ComparisonType.fromOperator(query.getArguments().get("comparison")));
+            case TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW ->
+                    repository.checkTransactionSumCompareDepositWithdraw(userId,
+                            ProductType.valueOf(query.getArguments().get(0)),
+                            ComparisonType.fromOperator(query.getArguments().get(1)));
 
-                case PRODUCT_OR_PRODUCT_SUMS_DEPOSIT_MORE_VALUE -> repository.checkProductOrProductSumMoreMoreValue(userId,
-                        ProductType.valueOf(query.getArguments().get("p.type1")),
-                        TransactionType.valueOf(query.getArguments().get("t.type1")),
-                        ComparisonType.fromOperator(query.getArguments().get("comparison1")),
-                        Integer.parseInt(query.getArguments().get("value1")),
-                        ProductType.valueOf(query.getArguments().get("p.type2")),
-                        TransactionType.valueOf(query.getArguments().get("t.type2")),
-                        ComparisonType.fromOperator(query.getArguments().get("comparison2")),
-                        Integer.parseInt(query.getArguments().get("value2")));
-            };
+            case PRODUCT_OR_PRODUCT_SUMS_DEPOSIT_MORE_VALUE -> repository.checkProductOrProductSumMoreMoreValue(userId,
+                    ProductType.valueOf(query.getArguments().get(0)),
+                    TransactionType.valueOf(query.getArguments().get(1)),
+                    ComparisonType.fromOperator(query.getArguments().get(2)),
+                    Integer.parseInt(query.getArguments().get(3)),
+                    ProductType.valueOf(query.getArguments().get(4)),
+                    TransactionType.valueOf(query.getArguments().get(5)),
+                    ComparisonType.fromOperator(query.getArguments().get(6)),
+                    Integer.parseInt(query.getArguments().get(7)));
+        };
 
-            if (query.getNegate() != null && query.getNegate()) {
-                result = !result;
-            }
-
-            if (!result) {
-                return false;
-            }
+        if (query.getNegate() != null && query.getNegate()) {
+            result = !result;
         }
-        return true;
+
+        if (!result) {
+            return false;
+        }
     }
+    return true;
+}
 }
 

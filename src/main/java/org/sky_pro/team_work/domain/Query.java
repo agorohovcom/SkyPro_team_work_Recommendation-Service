@@ -10,9 +10,8 @@ import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import org.sky_pro.team_work.enums.QueryType;
+import java.util.List;
 
-
-import java.util.Map;
 
 @Setter
 @Getter
@@ -30,7 +29,7 @@ public class Query {
  @JsonProperty("arguments")
  @NotEmpty(message = "Список аргументов не может быть пустым")
  @JdbcTypeCode(SqlTypes.JSON)
- private Map<String,String> arguments;
+ private List<String> arguments;
 
  @JsonProperty("negate")
  @NotNull(message = "Значение не может отсутствовать")
