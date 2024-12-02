@@ -13,6 +13,5 @@ public class TeamWorkApplication {
     public static void main(String[] args) {
         SpringApplication.run(TeamWorkApplication.class, args);
     }
-
 }
 

@@ -14,7 +14,6 @@ import org.sky_pro.team_work.validation.ValidArgumentType;
 
 import java.util.List;
 
-
 @Setter
 @Getter
 @Embeddable
