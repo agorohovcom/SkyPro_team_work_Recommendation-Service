@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/recommendationDB
-    username:  student
-    password:  chocolatefrog
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
   liquibase:
     change-log: classpath:db/liquibase/changelog-master.yml
   jpa:
@@ -11,9 +11,9 @@ spring:
 
 application:
   recommendations-db:
-    url: jdbc:h2:file:./transaction
+    url: ${RECOMMENDATIONS-DB_URL}
 
 telegram:
   bot:
-    token: 7939717113:AAE-cj52Rxtk4RE20TuRNbhn1Qfg0bkFWW8
-    username: RecommendationBot
+    token: ${TELEGRAM_BOT_TOKEN}
+    username: ${TELEGRAM_BOT_USERNAME}
