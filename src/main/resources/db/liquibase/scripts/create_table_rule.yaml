@@ -35,7 +35,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
               - column:
                   name: arguments
-                  type: TEXT[]
+                  type: JSONB
               - column:
                   name: negate
                   type: BOOLEAN
