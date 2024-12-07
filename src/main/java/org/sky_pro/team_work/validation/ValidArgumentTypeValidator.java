@@ -26,11 +26,9 @@ public class ValidArgumentTypeValidator
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        // Проверяем, является ли значение числом
         if (isNumeric(value)) {
             return true;
         }
-        // Проверяем, является ли значение допустимым строковым значением
         return value == null || validArguments.contains(value);
     }
 
