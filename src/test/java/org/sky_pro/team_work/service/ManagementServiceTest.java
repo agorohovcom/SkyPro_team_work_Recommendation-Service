@@ -1,9 +1,8 @@
-package org.sky_pro.team_work;
+package org.sky_pro.team_work.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.sky_pro.team_work.service.ManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,6 +31,6 @@ public class ManagementServiceTest {
     public void testClearCaches() {
         when(cacheManager.getCache("rules")).thenReturn(mockCache);
         managementService.clearCaches();
-        verify(mockCache,times(1)).clear();
+        verify(mockCache, times(1)).clear();
     }
 }
